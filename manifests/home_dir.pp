@@ -51,30 +51,33 @@ define accounts::home_dir(
       mode   => '0700',
     }
 
-    $inputrccheck = file("users/$user/inputrc",'/dev/null')
+    $inputrccheck = file("users/${user}/inputrc",'/dev/null')
     if($inputrccheck != '') {
-    file { "${name}/.inputrc":
+      file { "${name}/.inputrc":
         ensure => file,
         content => $inputrccheck,
         owner   => $user,
         group   => $user,
         mode    => '0644',
-        }
+      }
     }
 
-    if $bashrc_content {
+    $bashrccheck = file("users/${user}/bashrc",'/dev/null')
+    if($bashrccheck != '') {
       file { "${name}/.bashrc":
         ensure  => file,
-        content => $bashrc_content,
+        content => $bashrccheck,
         owner   => $user,
         group   => $user,
         mode    => '0644',
       }
     }
-    if $bash_profile_content {
+    
+    $bashprofilecheck = file("users/${user}/bash_profile",'/dev/null')
+    if($bashprofilecheck != '') {
       file { "${name}/.bash_profile":
         ensure  => file,
-        content => $bash_profile_content,
+        content => $bashprofilecheck,
         owner   => $user,
         group   => $user,
         mode    => '0644',
