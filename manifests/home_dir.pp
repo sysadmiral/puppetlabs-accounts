@@ -7,6 +7,7 @@
 # directory
 define accounts::home_dir(
   $user,
+  $inputrc_content	= undef,
   $bashrc_content       = undef,
   $bash_profile_content = undef,
   $mode                 = '0700',
@@ -48,6 +49,17 @@ define accounts::home_dir(
       owner  => $user,
       group  => $user,
       mode   => '0700',
+    }
+
+    $inputrccheck = file("users/$user/inputrc",'/dev/null')
+    if($inputrccheck != '') {
+    file { "${name}/.inputrc":
+        ensure => file,
+        content => $inputrccheck,
+        owner   => $user,
+        group   => $user,
+        mode    => '0644',
+        }
     }
 
     if $bashrc_content {
