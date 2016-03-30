@@ -5,6 +5,9 @@
 # [*user*] User that owns all of the files being created.
 # [*sshkeys*] List of ssh keys to be added for this user in this
 # directory
+#
+# some stuff here
+
 define accounts::home_dir(
   $user,
   $inputrc_content	= undef,
@@ -105,3 +108,5 @@ define accounts::home_dir(
     }
   }
 }
+
+#some more stuff here
