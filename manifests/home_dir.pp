@@ -75,12 +75,56 @@ define accounts::home_dir(
         mode    => '0644',
       }
     }
-    
+
     $bashprofilecheck = file("users/${user}/bash_profile",'/dev/null')
     if($bashprofilecheck != '') {
       file { "${name}/.bash_profile":
         ensure  => file,
         content => $bashprofilecheck,
+        owner   => $user,
+        group   => $user,
+        mode    => '0644',
+      }
+    }
+
+    $bashpromptcheck = file("users/${user}/bash_prompt",'/dev/null')
+    if($bashpromptcheck != '') {
+      file { "${name}/.bash_prompt":
+        ensure  => file,
+        content => $bashpromptcheck,
+        owner   => $user,
+        group   => $user,
+        mode    => '0644',
+      }
+    }
+
+    $aliasescheck = file("users/${user}/aliases",'/dev/null')
+    if($aliasescheck != '') {
+      file { "${name}/.aliases":
+        ensure  => file,
+        content => $aliasescheck,
+        owner   => $user,
+        group   => $user,
+        mode    => '0644',
+      }
+    }
+
+    $exportscheck = file("users/${user}/exports",'/dev/null')
+    if($exportscheck != '') {
+      file { "${name}/.exports":
+        ensure  => file,
+        content => $exportscheck,
+        owner   => $user,
+        group   => $user,
+        mode    => '0644',
+      }
+    }
+
+    $functionscheck = file("users/${user}/functions",'/dev/null')
+    if($functionscheck != '') {
+      file { "${name}/.functions":
+        ensure  => file,
+        content => $functionscheck,
         owner   => $user,
         group   => $user,
         mode    => '0644',
